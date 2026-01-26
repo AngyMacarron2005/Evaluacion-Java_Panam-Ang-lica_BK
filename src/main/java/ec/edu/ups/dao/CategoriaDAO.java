@@ -15,7 +15,7 @@ public class CategoriaDAO {
     private EntityManager em;
 
     public void insert(CategoriaModel c) {
-        em.persist(c);
+        em.merge(c);
     }
 
     public CategoriaModel read(int id) {

@@ -36,7 +36,8 @@ public class ProductoServices {
     public Response buscar(@PathParam("id") int id) {
 
         try {
-            ProductoModel producto = gestionProductos.getProducto(String.valueOf(id));
+        		ProductoModel producto = gestionProductos.getProducto(id);
+
 
             if (producto == null) {
                 return Response.status(Response.Status.NOT_FOUND)

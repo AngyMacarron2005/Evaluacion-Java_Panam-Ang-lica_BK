@@ -17,12 +17,13 @@ public class GestionProductos {
         return daoProductos.getAll();
     }
 
-     public ProductoModel getProducto(String id) throws Exception {
-        if (id == null || id.isEmpty())
-            throw new Exception("ID inválido");
+     public ProductoModel getProducto(int id) throws Exception {
+    	    if (id <= 0)
+    	        throw new Exception("ID inválido");
 
-        return daoProductos.read(id);
-    }
+    	    return daoProductos.read(id);
+    	}
+
 
      public void crearProducto(ProductoModel producto) throws Exception {
         if (producto.getId() <= 0)

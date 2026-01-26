@@ -34,9 +34,8 @@ public class CategoriaServices {
     @GET
     @Path("/{id}")
     public Response buscar(@PathParam("id") int id) {
-
         try {
-            CategoriaModel categoria = gestionCategoria.getCategoria(String.valueOf(id));
+            CategoriaModel categoria = gestionCategoria.getCategoria(id);
 
             if (categoria == null) {
                 return Response.status(Response.Status.NOT_FOUND)
@@ -53,24 +52,34 @@ public class CategoriaServices {
                     .build();
         }
     }
-
+    
     @POST
     public Response crear(CategoriaModel categoria) {
 
+        if (categoria.getNombre() == null || categoria.getNombre().isEmpty()) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new Error(400, "Nombre obligatorio",
+                            "El nombre no puede estar vacío"))
+                    .build();
+        }
+
         try {
             gestionCategoria.crearCategoria(categoria);
+
+            URI location = uriInfo.getAbsolutePathBuilder()
+                    .path(String.valueOf(categoria.getId()))
+                    .build();
+
+            return Response.created(location)
+                    .entity(categoria)
+                    .build();
+
         } catch (Exception e) {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity(new Error(400, "Datos inválidos", e.getMessage()))
                     .build();
         }
-
-        URI location = uriInfo.getAbsolutePathBuilder()
-                .path(String.valueOf(categoria.getId()))
-                .build();
-
-        return Response.created(location)
-                .entity(categoria)
-                .build();
     }
+
+
 }

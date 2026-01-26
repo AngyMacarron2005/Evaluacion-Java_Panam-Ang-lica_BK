@@ -1,20 +1,26 @@
+package ec.edu.ups.models;
+
+import jakarta.persistence.*;
+
 @Entity
 @Table(name = "TBL_PRODUCTO")
 public class ProductoModel {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pro_id")
     private int id;
 
-    @Column(name = "pro_nombre", nullable = false)
+    @Column(name = "pro_nombre", nullable = false, length = 100)
     private String nombreProductos;
 
-    @Column(name = "pro_precio")
+    @Column(name = "pro_precio", nullable = false)
     private double precio;
 
     @ManyToOne
     @JoinColumn(name = "cat_id", nullable = false)
     private CategoriaModel categoria;
+
 
     public int getId() {
         return id;

@@ -115,6 +115,19 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            
+            <dependency>
+			    <groupId>org.glassfish.jersey.containers</groupId>
+			    <artifactId>jersey-container-servlet</artifactId>
+			    <version>3.1.5</version>
+			</dependency>
+			
+			<dependency>
+			    <groupId>org.glassfish.jersey.media</groupId>
+			    <artifactId>jersey-media-json-binding</artifactId>
+			    <version>3.1.5</version>
+			</dependency>
+
 
             <!--Define the JUnit5 bom. WildFly BOM still contains JUnit4, so we have to declare a version here -->
             <dependency>
